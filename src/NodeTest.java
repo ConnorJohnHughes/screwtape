@@ -81,4 +81,30 @@ class NodeTest {
 
   // TODO: Add test for Node with no next or prev
   // TODO: Add at least one more test for list constructor that would be useful and cover new ground.
+  @Test
+  void listWithNoNextOrPrevious(){
+    //arrange
+    Node head = new Node(10);
+    //act
+    List<Integer> values = head.toList();
+    //assert
+    assertEquals(List.of(10), values);
+    assertNull(head.next);
+    assertNull(head.prev);
+  };
+
+  @Test
+  void waveOneBuildNodesThenTestWaveTwoToList(){
+    //arrange
+    List<Integer> values = List.of(5, 7, 3, 5, 8, 9, 0 ,5, 9);
+
+    // Act
+    Node head = new Node(values);
+    List<Integer> value = head.toList();
+
+    //assert
+    assertEquals(List.of(5, 7, 3, 5, 8, 9, 0 ,5, 9), value);
+  }
+
+
 }
