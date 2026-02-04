@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,37 @@ class ScrewtapeInterpreterTest {
 
   // TODO: Implement more tests for bracketMap
   // At a bare minimum, implement the other examples from the Javadoc and at least one more you come up with
+  @Test
+  void testThreeBrackets(){
+    //arrange
+    ScrewtapeInterpreter interpreter = new ScrewtapeInterpreter();
 
+    String program = "[+++][---]<<[+]";
+
+    Map<Integer, Integer> expectedMap = new HashMap<>();
+    expectedMap.put(4, 0);
+    expectedMap.put(9, 5);
+    expectedMap.put(14, 12);
+    //act
+    Map<Integer, Integer> actualMap = interpreter.bracketMap(program);
+    //assert
+    assertEquals(expectedMap, actualMap);
+   
+  }
+
+    @Test
+    void testOddBrackets() {
+    // arrange
+    ScrewtapeInterpreter interpreter = new ScrewtapeInterpreter();
+    String program = "[+++]---]<<[+]";
+
+    // act and assert
+    assertThrows(
+        EmptyStackException.class,
+        () -> interpreter.bracketMap(program),
+        "Error, There are unmatched brackets."
+    );
+}
   
 
   @Test
