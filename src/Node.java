@@ -74,9 +74,13 @@ public class Node {
 
 
     
-    this.prev = null;
+    // this.prev = null;
 
     Node current = this;
+
+    while(current.prev != null){
+      current = current.prev;
+    }
 
     while(current != null){
       list.add(current.value);
