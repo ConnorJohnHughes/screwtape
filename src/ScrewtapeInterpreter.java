@@ -157,10 +157,17 @@ public class ScrewtapeInterpreter {
     Node pointer = this.tapePointer;
     // System.out.println(head.value);
     String outWord = "";
+    Map<Integer, Integer> map = bracketMap(program);
+    // System.out.println(bracketMap(program));
 
    
     int count = 0;
+
+    
+
     while(count < program.length()){
+
+
       if(program.charAt(count) == '>'){
         if(pointer.next == null){
           Node newNode = new Node(0);
@@ -189,23 +196,34 @@ public class ScrewtapeInterpreter {
         pointer.value -= 1;
         
       }
+      
       if(program.charAt(count) == '.'){
-      char let = (char) tapePointer.value;
+      char let = (char) pointer.value;
       outWord += let;
+      // System.out.println("pv  " + pointer.value);
+      // System.out.println("word  " + outWord);
       }
+      if(program.charAt(count) == ']' && pointer.value != 0){
+        int n = map.get(count);
+        count = n;
+        // System.out.println(n);
+      } else {
+         count++;
+      }
+ 
 
-      System.out.println(pointer.value);
-      count++;
+      // System.out.println(pointer.value);
+    //  System.out.println(outWord);
       
     }
     // System.out.println(pointer.prev.value);
     
       tapePointer = pointer;
 
-      
-      // System.out.println(getTapePointerValue());
-      // System.out.println(tapePointer.value);
-
+      // System.out.println(getTapeData());
+      // System.out.println("pointer  "  + getTapePointerValue());
+      // System.out.println("final word=== " + outWord);
+   
     
     
     return outWord;
